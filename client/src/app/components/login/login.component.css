@@ -1,0 +1,30 @@
+.submit-btn {
+  background-color: black;
+  color: white;
+  width: 40%;
+  outline: 0;
+}
+.register-btn{
+        color: white;
+     text-decoration: none
+}
+
+.login {
+  margin-top: 2%;
+}
+
+.buttons {
+    padding-top: 5%;
+     text-decoration: none;
+  align-content: center;
+}
+
+button:focus {
+  border: none;
+  outline: none !important;
+  outline-style: none;
+}
+
+#emailHelp{
+    color: yellow;
+}

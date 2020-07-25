@@ -1,0 +1,100 @@
+
+    
+    <mat-horizontal-stepper  dir="rtl" [linear]="isLinear" #stepper>
+        <mat-step [stepControl]="firstFormGroup">
+            <form [formGroup]="firstFormGroup" >
+                <ng-template matStepLabel>פרטים אישיים</ng-template>
+                    <mat-form-field class="example-half-width">
+                        <mat-label>שם</mat-label>
+                        <input matInput placeholder="ישראל" formControlName="firstName" required>
+                    </mat-form-field>
+                    <mat-form-field class="example-half-width">
+                        <mat-label> שם משפחה</mat-label>
+                        <input matInput placeholder="ישראלי" formControlName="lastName" required>
+                    </mat-form-field>
+                    <mat-form-field class="example-full-width">
+                        <mat-label>ת״ז</mat-label>
+                        <input   type="number" matInput placeholder="ת״ז" formControlName="israeliId"   >
+                        <mat-error *ngIf="first.israeliId.errors?.isValidId"> הת״ז שהוקשה אינה תקינה יש להקיש ת״ז ישראלית בעלת 9 ספרות </mat-error>
+                            <mat-error *ngIf="first.israeliId.errors?.required && first.israeliId.touched">שדה זה
+                                הינו חובה </mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="example-full-width">
+                        <mat-label>דוא״ל</mat-label>
+                        <input matInput placeholder="דוא״ל" formControlName="email"   >
+                        <mat-error *ngIf="first.email.errors?.pattern">כתובת דוא״ל אינה תקינה </mat-error>
+                         <mat-error *ngIf="first.email.errors?.required && first.email.touched">שדה זה
+                                                    הינו חובה </mat-error>
+
+                    </mat-form-field>
+                    <mat-form-field class="example-full-width">
+                        <mat-label>סיסמא</mat-label>
+                        <input type="password" matInput placeholder="סיסמא" formControlName="password" >
+                        <mat-error *ngIf="first.password.errors?.pattern">הסיסמא חייבת להכיל לפחות 8 תווים אות אחת ומספר אחד </mat-error>
+                         <mat-error *ngIf="first.password.errors?.required && first.password.touched">שדה זה
+                                                    הינו חובה </mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="example-full-width">
+                        <mat-label>אימות סיסמא</mat-label>
+                        <input type="password" matInput placeholder="אימות סיסמא" formControlName="passwordVld"  >
+                    <mat-error *ngIf="first.passwordVld.errors?.required  && first.passwordVld.touched">שדה זה
+                    הינו חובה</mat-error>
+                    <mat-error *ngIf="first.passwordVld.errors?.mustMatch">הסיסמא שהוקשה אינה זהה</mat-error>
+                    </mat-form-field>
+                <div>
+                    <button mat-button matStepperNext  >הבא</button>
+                </div>
+            </form>
+        </mat-step>
+        <mat-step [stepControl]="secondFormGroup">
+            <form [formGroup]="secondFormGroup">
+                <ng-template matStepLabel>כתובת</ng-template>
+                <mat-form-field class="example-full-width">
+                    <mat-label>עיר</mat-label>
+                    <input matInput placeholder="תל אביב" formControlName="city" required [matAutocomplete]="auto" >
+                        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                    <mat-option *ngFor="let city of cities " [value]="city">
+                        {{city}}
+                    </mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>
+                <mat-form-field class="example-full-width">
+                    <mat-label>רחוב</mat-label>
+                    <input matInput placeholder="דיזינגוף" formControlName="street" required [matAutocomplete]="auto2">
+                    <mat-autocomplete autoActiveFirstOption #auto2="matAutocomplete">
+                        <mat-option *ngFor="let street of streets " [value]="street">
+                            {{street}}
+                        </mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>
+                <mat-form-field class="example-half-width">
+                    <mat-label>מספר בית</mat-label>
+                    <input matInput placeholder="1" formControlName="house" required>
+                </mat-form-field>
+                <mat-form-field class="example-half-width">
+                    <mat-label>דירה</mat-label>
+                    <input matInput placeholder="1" formControlName="apt" required>
+                </mat-form-field>
+                <mat-form-field class="example-full-width">
+                    <mat-label>טלפון נייד</mat-label>
+                    <input type="tel" matInput placeholder="0546123456" formControlName="telephone" required>
+                    <mat-error *ngIf="second.telephone.errors?.pattern">יש להקליד טלפון נייד ישראלי בלבד </mat-error>
+                </mat-form-field>
+                <div>
+                    <button mat-button matStepperPrevious>חזור</button>
+                    <button mat-button matStepperNext  >הבא</button>
+                </div>
+            </form>
+        </mat-step>
+        <mat-step>
+            <ng-template matStepLabel>וודא פרטים</ng-template>
+            <div>
+                <div>
+                <app-phone-auth></app-phone-auth>
+                </div>
+                <button mat-button matStepperPrevious>חזור</button>
+                <button mat-button (click)="stepper.reset()">אפס טופס</button>
+                <button mat-button (click)="register()">שלח</button>
+            </div>
+        </mat-step>
+    </mat-horizontal-stepper>

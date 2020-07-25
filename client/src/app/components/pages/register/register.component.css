@@ -1,0 +1,24 @@
+.sector{
+    height: 100%;
+    color: #fff;
+    background-color: #bf1e2e;
+    border-radius: 5px;
+    margin: 1.2%;
+}
+.homeDiv {
+    height: 80%;  
+    overflow: auto; 
+    padding-top: 4% 
+}
+.row {
+    height:80%;
+    
+}
+.example-full-width {
+  width: 100%;
+}
+.example-half-width {
+  width: 50%;
+}
+
+

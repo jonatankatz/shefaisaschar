@@ -1,0 +1,24 @@
+<div [hidden]="user">
+    <h1>אנו מאמתים את מספר הטלפון הנייד שהזנת </h1>
+
+ 
+    <div id="recaptcha-container">
+        
+    </div>
+
+    <button (click)="sendLoginCode()">שלח מסרון עם קוד אימות </button>
+
+    <div *ngIf="windowRef.confirmationResult">
+        <hr>
+        <label for="code">הכנס את קוד האימות שקיבלת לנייד</label><br>
+        <ng-otp-input type="text" name="code" [(ngModel)]="verificationCode"  [config]="{length:6}"></ng-otp-input>
+
+        <button (click)="verifyLoginCode()">אמת</button>
+    </div>
+
+</div>
+
+<div *ngIf="user">
+   מספר הטלפון הנייד שלך אומת בהצלחה 
+    UserId: {{ user?.uid }}
+</div>
